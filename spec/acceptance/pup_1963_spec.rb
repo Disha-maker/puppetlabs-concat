@@ -10,7 +10,9 @@ command = case os[:family]
           end
 
 describe 'with metaparameters' do
-  before(:each) do
+  attr_reader :basedir
+
+  before(:all) do
     @basedir = setup_test_directory
   end
 
@@ -19,7 +21,7 @@ describe 'with metaparameters' do
       <<-MANIFEST
         concat { "foobar":
           ensure => 'present',
-          path   => '#{@basedir}/foobar',
+          path   => '#{basedir}/foobar',
         }
 
         concat::fragment { 'foo':
@@ -53,7 +55,7 @@ describe 'with metaparameters' do
 
         concat { "foobar":
           ensure => 'present',
-          path   => '#{@basedir}/foobar',
+          path   => '#{basedir}/foobar',
           notify => Exec['trigger'],
         }
 
